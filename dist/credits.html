@@ -98,6 +98,19 @@
             text-decoration: underline;
         }
 
+        /* Screen-reader-only text */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .back-link {
             display: inline-block;
             padding: 10px 20px;
@@ -131,13 +144,66 @@
                 padding: 20px;
             }
 
-            table {
-                font-size: 0.9em;
+            /* Hide table header row on mobile */
+            thead tr:first-child {
+                display: none;
             }
 
-            th, td {
-                padding: 8px;
+            /* Section headers remain visible */
+            th.section-header {
+                display: block;
+                margin-top: 20px;
+                border-radius: 6px;
             }
+
+            /* Transform table rows into cards */
+            table, tbody, tr, td {
+                display: block;
+            }
+
+            tr:not(:has(.section-header)) {
+                background: #f8f9fa;
+                border-radius: 8px;
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            td {
+                padding: 4px 0;
+                border-bottom: none;
+            }
+
+            /* Icon column inline on mobile */
+            .icon-col {
+                display: inline;
+                width: auto;
+                margin-right: 8px;
+            }
+
+            /* Style the project name prominently, inline with icon */
+            td:nth-child(2) {
+                display: inline;
+                font-weight: 600;
+                font-size: 1.05em;
+            }
+
+            /* Style purpose as main text */
+            td:nth-child(3) {
+                color: #666;
+                line-height: 1.4;
+            }
+
+            /* Style license smaller */
+            td:nth-child(4) {
+                font-size: 0.85em;
+                color: #666;
+                margin-top: 6px;
+            }
+
+            td:nth-child(4):empty {
+                display: none;
+            }
+
             img:not([src]), img[src=""] { visibility: hidden; }
         }
     </style>
@@ -150,7 +216,7 @@
         </header>
 
         <div class="content">
-            <a href="/" class="back-link">← Back to Highlights</a>
+            <a href="/" class="back-link" aria-label="Back to Highlights"><span aria-hidden="true">←</span> Back to Highlights</a>
 
             <table>
                 <thead>
@@ -203,6 +269,12 @@
                         <td><a href="https://opencv.org/" target="_blank">OpenCV</a></td>
                         <td>Video frame extraction, image processing, and quality analysis</td>
                         <td><a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0</a></td>
+                    </tr>
+                    <tr>
+                        <td class="icon-col"><a href="https://birdnet.cornell.edu/"></a></td>
+                        <td><a href="https://github.com/birdnet-team/BirdNET-Analyzer" target="_blank">BirdNET</a></td>
+                        <td>Deep learning model for bird song identification from audio recordings</td>
+                        <td><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></td>
                     </tr>
 
                     <tr>
@@ -278,6 +350,14 @@
     </div>
     <script>
 document.addEventListener('DOMContentLoaded', () => {
+            // Add screen-reader text to external links that open in new tab
+            document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                const srText = document.createElement('span');
+                srText.className = 'visually-hidden';
+                srText.textContent = ' (opens in new tab)';
+                link.appendChild(srText);
+            });
+
             const rows = document.querySelectorAll('#credits-body tr');
 
             rows.forEach(row => {
