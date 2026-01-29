@@ -1,0 +1,18 @@
+/**
+ * birdbird Web Viewer Configuration
+ * Production deployment for birdbird.rossarn.workers.dev
+ */
+
+window.BIRDBIRD_CONFIG = {
+  // R2 bucket public URL
+  r2BaseUrl: 'https://pub-975f47bf9a614239932c993acd009ad5.r2.dev',
+
+  // Site title
+  siteName: 'Bird Feeder Highlights',
+
+  // Site subtitle with location
+  siteSubtitle: 'Holt, Wiltshire • Automated bird activity highlights from motion-triggered clips',
+
+  // Analytics code (add when F7 is implemented)
+  analytics: ''
+};
