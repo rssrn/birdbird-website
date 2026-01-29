@@ -11,7 +11,7 @@
     --forest-mid: #4a7c2b;
     --olive-green: #6b8e23;
     --sage: #9caf88;
-    --bark-brown: #8b7355;
+    --bark-brown: #5a4a3a;
     --earth-brown: #6b5744;
     --sky-blue: #7ba3c0;
     --sky-light: #a8c5d9;
@@ -249,6 +249,49 @@ footer a:hover {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* Container width modifiers */
+.container--narrow {
+    max-width: 800px;
+}
+
+.container--wide {
+    max-width: 1400px;
+}
+
+/* Loading and error states */
+.loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.error {
+    text-align: center;
+    padding: 80px 20px;
+    color: #b85450;
+    font-size: 1.1em;
+    background: rgba(184, 84, 80, 0.06);
+    border: 2px solid rgba(184, 84, 80, 0.2);
+    border-radius: 2px;
+    margin: 20px;
+}
+
+/* Info callout box */
+.info-callout {
+    background: var(--parchment-light);
+    padding: 18px 22px;
+    border-radius: 2px;
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: 1.7;
+    border-left: 4px solid var(--sky-blue);
+    font-family: 'Lato', sans-serif;
 }
 
 @media (max-width: 768px) {

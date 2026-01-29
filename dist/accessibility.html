@@ -12,10 +12,6 @@
     <script src="config.js"></script>
     <script src="config-loader.js"></script>
     <style>
-        .container {
-            max-width: 800px;
-        }
-
         .updated {
             margin-top: 40px;
             padding-top: 20px;
@@ -27,7 +23,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container container--narrow">
         <header>
             <h1>Accessibility</h1>
             <div class="subtitle">Our commitment to inclusive access</div>
@@ -50,6 +46,8 @@
                 <li>Sufficient colour contrast for text</li>
                 <li>Semantic HTML structure</li>
                 <li>Labels for audio and video controls</li>
+                <li>Automated pre-commit validation using <a href="https://html-validate.org/">html-validate</a> to catch WCAG violations in source HTML</li>
+                <li>Runtime accessibility testing using <a href="https://pa11y.org/">pa11y</a> to verify the rendered page in a headless browser</li>
             </ul>
 
             <h2>Known limitations</h2>

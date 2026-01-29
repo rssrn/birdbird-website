@@ -16,32 +16,8 @@
     <script src="config-loader.js"></script>
     <style>
         /* Viewer-specific styles only */
-        .container {
-            max-width: 1400px;
-        }
-
         .content {
             padding: 25px 40px 40px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 80px 20px;
-            color: var(--text-secondary);
-            font-size: 1.1em;
-            font-family: 'Lato', sans-serif;
-            font-weight: 400;
-        }
-
-        .error {
-            text-align: center;
-            padding: 80px 20px;
-            color: #b85450;
-            font-size: 1.1em;
-            background: rgba(184, 84, 80, 0.06);
-            border: 2px solid rgba(184, 84, 80, 0.2);
-            border-radius: 2px;
-            margin: 20px;
         }
 
         .video-container {
@@ -59,6 +35,7 @@
             width: 100%;
             display: block;
             background: #000;
+            color: #b0c4d4;
         }
 
         .play-overlay {
@@ -349,18 +326,6 @@
 
         .tab-content.hidden {
             display: none;
-        }
-
-        .audio-explainer {
-            background: var(--parchment-light);
-            padding: 18px 22px;
-            border-radius: 2px;
-            margin-bottom: 30px;
-            color: var(--text-secondary);
-            font-size: 0.95em;
-            line-height: 1.7;
-            border-left: 4px solid var(--sky-blue);
-            font-family: 'Lato', sans-serif;
         }
 
         .audio-stats {
@@ -876,7 +841,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container container--wide">
         <header>
             <h1>Bird Feeder Highlights</h1>
             <div class="subtitle">Holt, Wiltshire • Automated bird activity highlights from motion-triggered clips</div>
@@ -896,9 +861,9 @@
 
                 <!-- Tab Navigation -->
                 <div class="tabs" role="tablist" aria-label="Content tabs">
-                    <button class="tab-button active" data-tab="highlights" role="tab" id="tab-highlights" aria-selected="true" aria-controls="highlights-tab">Highlights</button>
-                    <button class="tab-button" data-tab="video-stats" role="tab" id="tab-video-stats" aria-selected="false" aria-controls="video-stats-tab">Video Stats</button>
-                    <button class="tab-button" data-tab="audio-stats" role="tab" id="tab-audio-stats" aria-selected="false" aria-controls="audio-stats-tab">Audio Stats</button>
+                    <button type="button" class="tab-button active" data-tab="highlights" role="tab" id="tab-highlights" aria-selected="true" aria-controls="highlights-tab">Highlights</button>
+                    <button type="button" class="tab-button" data-tab="video-stats" role="tab" id="tab-video-stats" aria-selected="false" aria-controls="video-stats-tab">Video Stats</button>
+                    <button type="button" class="tab-button" data-tab="audio-stats" role="tab" id="tab-audio-stats" aria-selected="false" aria-controls="audio-stats-tab">Audio Stats</button>
                 </div>
 
                 <!-- Highlights Tab -->
@@ -914,9 +879,9 @@
                                     <source id="video-source" src="" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <div class="play-overlay" id="play-overlay" role="button" tabindex="0" aria-label="Play video">
-                                    <div class="play-button"></div>
-                                </div>
+                                <button type="button" class="play-overlay" id="play-overlay" aria-label="Play video">
+                                    <span class="play-button"></span>
+                                </button>
                             </div>
 
                             <!-- Metadata -->
@@ -935,7 +900,7 @@
 
                 <!-- Video Stats Tab -->
                 <div class="tab-content hidden" id="video-stats-tab" role="tabpanel" aria-labelledby="tab-video-stats">
-                    <div class="audio-explainer">
+                    <div class="info-callout">
                         Bird species are visually identified using BioCLIP analysis of motion-triggered video clips. Detections represent birds visible on camera during recording periods.
                     </div>
                     <div class="audio-stats" id="video-stats-container">
@@ -945,7 +910,7 @@
 
                 <!-- Audio Stats Tab -->
                 <div class="tab-content hidden" id="audio-stats-tab" role="tabpanel" aria-labelledby="tab-audio-stats">
-                    <div class="audio-explainer">
+                    <div class="info-callout">
                         Bird vocalisations detected from background sound in motion-triggered clips. Birds were likely off-camera.
                     </div>
                     <div class="audio-stats" id="audio-stats-container">
@@ -959,11 +924,6 @@
             Powered by birdbird |
             <a href="credits.html">Credits</a> |
             <a href="accessibility.html">Accessibility</a>
-            <div style="font-size: 0.85em; margin-top: 12px; opacity: 0.8;">
-                Bird detection using YOLOv8 trained on
-                <a href="https://cocodataset.org/">COCO dataset</a>
-                (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)
-            </div>
         </footer>
     </div>
 
@@ -978,7 +938,7 @@
             <p>This means the best moment is usually when the species appears multiple times, stays in view longer, or when we're very confident in the identification - or a combination of all three.</p>
 
             <p>When you click on a species name, the video jumps to that moment so the following few seconds are the best view this highlights video can offer of that type of bird.</p>
-                <p></p>The same species may also occur in other parts of the highlights video.</p>
+            <p>The same species may also occur in other parts of the highlights video.</p>
         </div>
     </template>
 
