@@ -60,7 +60,8 @@
             border-bottom: 1px dotted var(--forest-mid);
         }
 
-        td a:hover {
+        td a:hover,
+        td a:focus {
             color: var(--forest-deep);
             border-bottom-style: solid;
         }
@@ -83,6 +84,7 @@
             border-bottom: none;
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Table rows are not focusable */
         tr:hover td {
             background: var(--parchment-light);
         }
@@ -157,13 +159,14 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
         <header>
             <h1>Credits &amp; Acknowledgments</h1>
             <div class="subtitle">Technologies powering birdbird</div>
         </header>
 
-        <div class="content">
+        <div class="content" id="main-content">
             <nav aria-label="Breadcrumb" class="breadcrumb">
                 <a href="index.html">Home</a>
                 <span class="separator">/</span>
@@ -328,6 +331,12 @@
                         <td><a href="https://www.gnu.org/licenses/lgpl-3.0.html" target="_blank">LGPL-3.0</a></td>
                     </tr>
                     <tr>
+                        <td class="icon-col"></td>
+                        <td><a href="https://www.npmjs.com/package/@double-great/stylelint-a11y" target="_blank">stylelint-a11y</a></td>
+                        <td>CSS accessibility linting to enforce WCAG best practices including focus indicators and motion preferences</td>
+                        <td><a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></td>
+                    </tr>
+                    <tr>
                         <td class="icon-col"><a href="https://docs.pytest.org/" aria-label="pytest documentation"><img src="https://www.google.com/s2/favicons?domain=docs.pytest.org&sz=32" class="favicon-img" alt="pytest documentation"></a></td>
                         <td><a href="https://github.com/pytest-dev/pytest" target="_blank">pytest</a></td>
                         <td>Python testing framework for unit and integration tests</td>
@@ -355,8 +364,14 @@
         </div>
 
         <footer>
-            Made with appreciation for the open source community |
-            <a href="accessibility.html">Accessibility</a>
+            <nav aria-label="Footer navigation">
+                <a href="index.html">Highlights</a> |
+                <a href="method.html">How It Works</a> |
+                <a href="accessibility.html">Accessibility</a>
+            </nav>
+            <div style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9em;">
+                Powered by birdbird • Made with appreciation for the open source community
+            </div>
         </footer>
     </div>
     <script>

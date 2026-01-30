@@ -17,11 +17,11 @@
     <style>
         /* Viewer-specific styles only */
         .content {
-            padding: 25px 40px 40px;
+            padding: 25px 40px 5px;
         }
 
         .video-container {
-            margin: 40px 0;
+            margin: 0 0 40px 0;
             border-radius: 2px;
             overflow: hidden;
             box-shadow:
@@ -36,6 +36,20 @@
             display: block;
             background: #000;
             color: #b0c4d4;
+        }
+
+        video:focus {
+            outline: 3px solid var(--sky-blue);
+            outline-offset: -3px;
+        }
+
+        video:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        video:focus-visible {
+            outline: 3px solid var(--sky-blue);
+            outline-offset: -3px;
         }
 
         .play-overlay {
@@ -62,6 +76,20 @@
             pointer-events: none;
         }
 
+        .play-overlay:focus {
+            outline: 3px solid var(--sky-blue);
+            outline-offset: -3px;
+        }
+
+        .play-overlay:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .play-overlay:focus-visible {
+            outline: 3px solid var(--sky-blue);
+            outline-offset: -3px;
+        }
+
         .play-button {
             width: 110px;
             height: 110px;
@@ -75,6 +103,7 @@
             border: 3px solid var(--forest-mid);
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Nested element inherits focus from .play-overlay */
         .play-overlay:hover .play-button {
             transform: scale(1.08);
             background: var(--cream-white);
@@ -89,108 +118,6 @@
             border-top: 22px solid transparent;
             border-bottom: 22px solid transparent;
             margin-left: 8px;
-        }
-
-        .metadata {
-            background: var(--parchment-light);
-            border: 1px solid var(--parchment-dark);
-            border-radius: 2px;
-            margin: 30px 0 0 0;
-            overflow: hidden;
-            box-shadow: 0 2px 6px var(--shadow-soft);
-        }
-
-        .metadata-header {
-            padding: 16px 20px;
-            background: var(--parchment-light);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s ease;
-            border-bottom: 1px solid var(--parchment-dark);
-        }
-
-        .metadata-header:hover {
-            background: var(--cream-white);
-        }
-
-        .metadata h2 {
-            color: var(--text-primary);
-            margin: 0;
-            font-size: 0.95em;
-            font-weight: 700;
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .metadata-toggle {
-            font-size: 0.8em;
-            color: var(--bark-brown);
-            transition: transform 0.2s ease;
-        }
-
-        .metadata-toggle.expanded {
-            transform: rotate(180deg);
-        }
-
-        .metadata-content {
-            padding: 20px;
-            display: none;
-            background: var(--cream-white);
-        }
-
-        .metadata-content.expanded {
-            display: block;
-            animation: expandDown 0.3s ease;
-        }
-
-        @keyframes expandDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .metadata-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-        }
-
-        .metadata-item {
-            padding: 14px;
-            background: var(--parchment-light);
-            border-radius: 2px;
-            border-left: 4px solid var(--bark-brown);
-            transition: all 0.2s ease;
-        }
-
-        .metadata-item:hover {
-            border-left-width: 6px;
-            background: var(--cream-white);
-            transform: translateX(2px);
-        }
-
-        .metadata-label {
-            font-size: 0.75em;
-            color: var(--bark-brown);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-
-        .metadata-value {
-            font-size: 1.25em;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-family: 'Lato', sans-serif;
         }
 
         .archive {
@@ -231,6 +158,20 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
+        .method-link:focus {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
+        .method-link:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .method-link:focus-visible {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
         .archive-link {
             padding: 12px 22px;
             background: var(--cream-white);
@@ -259,10 +200,25 @@
             font-weight: 600;
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Current/disabled state, not interactive */
         .archive-link.current:hover {
             background: var(--forest-mid);
             transform: none;
             box-shadow: none;
+        }
+
+        .archive-link:focus {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
+        .archive-link:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .archive-link:focus-visible {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
         }
 
         .tabs {
@@ -316,12 +272,24 @@
             transform: scaleX(1);
         }
 
+        .tab-button:focus {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
+        .tab-button:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .tab-button:focus-visible {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
         .tab-content {
-            border: 3px solid var(--parchment-dark);
-            border-top: none;
-            border-radius: 0 0 2px 2px;
             padding: 40px;
             background: var(--cream-white);
+            border-radius: 0 0 2px 2px;
         }
 
         .tab-content.hidden {
@@ -352,6 +320,7 @@
             transition: background 0.2s ease;
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Non-focusable row, visual feedback only */
         .species-row:hover {
             background: var(--parchment-light);
             padding-left: 8px;
@@ -421,6 +390,20 @@
             min-width: 150px;
             max-width: 170px;
             border-radius: 2px;
+        }
+
+        .song-clip-player:focus {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
+        .song-clip-player:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .song-clip-player:focus-visible {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
         }
 
         .song-clip-spacer {
@@ -550,6 +533,7 @@
             transform: translateX(2px);
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Pseudo-element inherits focus from parent button */
         .species-seek-button:hover::before {
             opacity: 1;
             left: 12px;
@@ -557,6 +541,20 @@
 
         .species-seek-button:active {
             transform: translateX(4px);
+        }
+
+        .species-seek-button:focus {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
+        }
+
+        .species-seek-button:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .species-seek-button:focus-visible {
+            outline: 2px solid var(--sky-blue);
+            outline-offset: 2px;
         }
 
         .species-seek-button.probable {
@@ -576,6 +574,7 @@
             color: var(--sage);
         }
 
+        /* stylelint-disable-next-line a11y/selector-pseudo-class-focus -- Variant styling inherits focus from base .species-seek-button */
         .species-seek-button.possible:hover {
             opacity: 1;
         }
@@ -606,10 +605,6 @@
         }
 
         @media (max-width: 768px) {
-            .metadata-grid {
-                grid-template-columns: 1fr;
-            }
-
             .tab-button {
                 padding: 12px 20px;
                 font-size: 0.95em;
@@ -665,15 +660,6 @@
         .container {
             animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .metadata-item {
-            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .metadata-item:nth-child(1) { animation-delay: 0.05s; }
-        .metadata-item:nth-child(2) { animation-delay: 0.1s; }
-        .metadata-item:nth-child(3) { animation-delay: 0.15s; }
-        .metadata-item:nth-child(4) { animation-delay: 0.2s; }
 
         /* Info Icon & Overlay System */
         .info-icon {
@@ -845,6 +831,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container container--wide">
         <header>
             <h1>Bird Feeder Highlights</h1>
@@ -879,24 +866,13 @@
                         <div class="video-wrapper">
                             <!-- Video player -->
                             <div class="video-container">
-                                <video id="highlights-player" controls preload="metadata">
+                                <video id="highlights-player" controls preload="metadata" aria-label="Bird feeder highlights video">
                                     <source id="video-source" src="" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                                 <button type="button" class="play-overlay" id="play-overlay" aria-label="Play video">
                                     <span class="play-button"></span>
                                 </button>
-                            </div>
-
-                            <!-- Metadata -->
-                            <div class="metadata">
-                                <div class="metadata-header" id="metadata-header">
-                                    <h2>Batch Information</h2>
-                                    <span class="metadata-toggle">▼</span>
-                                </div>
-                                <div class="metadata-content" id="metadata-content">
-                                    <div class="metadata-grid" id="metadata-container"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -919,9 +895,14 @@
         </div>
 
         <footer>
-            Powered by birdbird |
-            <a href="credits.html">Credits</a> |
-            <a href="accessibility.html">Accessibility</a>
+            <nav aria-label="Footer navigation">
+                <a href="method.html">How It Works</a> |
+                <a href="credits.html">Credits</a> |
+                <a href="accessibility.html">Accessibility</a>
+            </nav>
+            <div style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9em;">
+                Powered by birdbird
+            </div>
         </footer>
     </div>
 
@@ -1242,33 +1223,6 @@
             const videoSource = document.getElementById('video-source');
             videoSource.src = `${R2_BASE_URL}/batches/${metadata.batch_id}/highlights.mp4`;
             document.getElementById('highlights-player').load();
-
-            // Render metadata
-            const metadataContainer = document.getElementById('metadata-container');
-            metadataContainer.innerHTML = '';
-
-            // Format date range from start_date and end_date (fall back to original_date if not present)
-            const dateRangeText = formatDateRangeFull(
-                metadata.start_date || metadata.original_date,
-                metadata.end_date || metadata.original_date
-            );
-
-            const metadataItems = [
-                { label: 'Capture Date(s)', value: dateRangeText },
-                { label: 'Clips Processed', value: metadata.clip_count },
-                { label: 'Highlights Duration', value: formatDuration(metadata.highlights_duration) },
-                { label: 'Uploaded', value: formatShortDate(metadata.uploaded) },
-            ];
-
-            metadataItems.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'metadata-item';
-                itemDiv.innerHTML = `
-                    <div class="metadata-label">${item.label}</div>
-                    <div class="metadata-value">${item.value}</div>
-                `;
-                metadataContainer.appendChild(itemDiv);
-            });
 
             // Render archive links
             if (allBatches.length > 1) {
@@ -1713,48 +1667,6 @@
             container.innerHTML = html;
         }
 
-        function formatDuration(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}m ${secs}s`;
-        }
-
-        function formatShortDate(isoDateString) {
-            // Format as "19 Jan 2026"
-            const date = new Date(isoDateString);
-            const day = date.getDate();
-            const month = date.toLocaleDateString('en-GB', { month: 'short' });
-            const year = date.getFullYear();
-            return `${day} ${month} ${year}`;
-        }
-
-        function formatDateRangeFull(startDateStr, endDateStr) {
-            // Format date range for metadata section:
-            // - Single day: "16 January 2026"
-            // - Multi-day same month: "14-16 January 2026"
-            // - Cross month: "31 January - 2 February 2026"
-
-            const startDate = new Date(startDateStr + 'T00:00:00');
-            const endDate = new Date(endDateStr + 'T00:00:00');
-
-            const startDay = startDate.getDate();
-            const endDay = endDate.getDate();
-            const startMonth = startDate.toLocaleDateString('en-GB', { month: 'long' });
-            const endMonth = endDate.toLocaleDateString('en-GB', { month: 'long' });
-            const year = startDate.getFullYear();
-
-            if (startDateStr === endDateStr) {
-                // Single day
-                return `${startDay} ${startMonth} ${year}`;
-            } else if (startMonth === endMonth) {
-                // Same month
-                return `${startDay}-${endDay} ${startMonth} ${year}`;
-            } else {
-                // Different months
-                return `${startDay} ${startMonth} - ${endDay} ${endMonth} ${year}`;
-            }
-        }
-
         function formatDateRangeShort(startDateStr, endDateStr) {
             // Format date range for archive links (no year):
             // - Single day: "19 Jan"
@@ -1815,49 +1727,8 @@
             });
         }
 
-        function initMetadataToggle() {
-            const header = document.getElementById('metadata-header');
-            const content = document.getElementById('metadata-content');
-            const toggle = document.querySelector('.metadata-toggle');
-
-            if (!header || !content || !toggle) return;
-
-            header.addEventListener('click', () => {
-                const isExpanded = content.classList.contains('expanded');
-
-                if (isExpanded) {
-                    content.classList.remove('expanded');
-                    toggle.classList.remove('expanded');
-                } else {
-                    content.classList.add('expanded');
-                    toggle.classList.add('expanded');
-                }
-            });
-
-            // Add keyboard support
-            header.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    header.click();
-                }
-            });
-
-            header.setAttribute('role', 'button');
-            header.setAttribute('tabindex', '0');
-            header.setAttribute('aria-expanded', 'false');
-            header.setAttribute('aria-controls', 'metadata-content');
-
-            // Update aria-expanded when toggled
-            const observer = new MutationObserver(() => {
-                const isExpanded = content.classList.contains('expanded');
-                header.setAttribute('aria-expanded', isExpanded.toString());
-            });
-            observer.observe(content, { attributes: true, attributeFilter: ['class'] });
-        }
-
         // Initialize tabs and load batch on page load
         initTabs();
-        initMetadataToggle();
         loadBatch(requestedBatch);
     </script>
 </body>
