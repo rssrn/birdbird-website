@@ -13,6 +13,6 @@ window.BIRDBIRD_CONFIG = {
   // Site subtitle with location
   siteSubtitle: 'Holt, Wiltshire • Automated bird activity highlights from motion-triggered clips',
 
-  // Analytics code (add when F7 is implemented)
+  // Analytics code
   analytics: '<script defer src="https://cloud.umami.is/script.js" data-website-id="b289f3b8-d85a-41a3-b971-54b506146e17"></script>'
 };
