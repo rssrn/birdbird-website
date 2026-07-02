@@ -14,5 +14,5 @@ window.BIRDBIRD_CONFIG = {
   siteSubtitle: 'Holt, Wiltshire • Automated bird activity highlights from motion-triggered clips',
 
   // Analytics code
-  analytics: '<script defer src="https://cloud.umami.is/script.js" data-website-id="b289f3b8-d85a-41a3-b971-54b506146e17"></script>'
+  analytics: '<script defer src="https://umami.rossarnold.uk/script.js" data-website-id="ef619203-335e-4825-bc02-56655ba97334"></script>'
 };
