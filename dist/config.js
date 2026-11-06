@@ -4,8 +4,8 @@
  */
 
 window.BIRDBIRD_CONFIG = {
-  // R2 bucket public URL
-  r2BaseUrl: 'https://pub-975f47bf9a614239932c993acd009ad5.r2.dev',
+  // R2 bucket, served same-origin by src/worker.js (was the rate-limited r2.dev URL)
+  r2BaseUrl: '/media',
 
   // Site title
   siteName: 'Bird Feeder Highlights',
