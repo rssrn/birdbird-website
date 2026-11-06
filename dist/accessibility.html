@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessibility statement for the Bird Feeder Highlights viewer — known limitations and contact information.">
     <title>Accessibility - Bird Feeder Highlights</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="config.local.js" onerror="this.remove()"></script>
+    <script>
+      // Local dev only: load the gitignored config.local.js override. document.write keeps
+      // it synchronous so it runs before config.js (which defers to an existing config).
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        document.write('<script src="config.local.js"><\/script>');
+      }
+    </script>
     <script src="config.js"></script>
     <script src="config-loader.js"></script>
     <style>

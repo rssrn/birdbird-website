@@ -10,15 +10,40 @@
 
 const MEDIA_PREFIX = '/media/';
 
+// Local viewer development (npx serve -l 3000 src/birdbird/templates in the birdbird repo)
+// reads production media cross-origin, so those origins get CORS headers.
+const DEV_ORIGINS = new Set(['http://localhost:3000', 'http://127.0.0.1:3000']);
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname.startsWith(MEDIA_PREFIX)) {
-      return serveMedia(request, env, decodeURIComponent(url.pathname.slice(MEDIA_PREFIX.length)));
+      const response = await serveMedia(request, env, decodeURIComponent(url.pathname.slice(MEDIA_PREFIX.length)));
+      return withCors(request, response);
     }
     return env.ASSETS.fetch(request);
   },
 };
+
+/**
+ * Add CORS headers for the local dev origins only; production is same-origin and
+ * needs none. Vary: Origin keeps caches from mixing the two variants.
+ *
+ * @author Claude Opus 5.5 Anthropic
+ */
+function withCors(request, response) {
+  const origin = request.headers.get('Origin');
+  const headers = new Headers(response.headers);
+  headers.append('Vary', 'Origin');
+  if (origin && DEV_ORIGINS.has(origin)) {
+    headers.set('Access-Control-Allow-Origin', origin);
+    headers.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+    headers.set('Access-Control-Allow-Headers', 'Range, If-None-Match');
+    headers.set('Access-Control-Expose-Headers', 'Content-Length, Content-Range, ETag');
+    headers.set('Access-Control-Max-Age', '86400');
+  }
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
 
 /**
  * Serve one R2 object, honouring Range and conditional (ETag) requests so
@@ -27,8 +52,11 @@ export default {
  * @author Claude Opus 5.5 Anthropic
  */
 async function serveMedia(request, env, key) {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: { Allow: 'GET, HEAD, OPTIONS' } });
+  }
   if (request.method !== 'GET' && request.method !== 'HEAD') {
-    return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
+    return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'GET, HEAD, OPTIONS' } });
   }
   if (!key || key.includes('..')) {
     return new Response('Not Found', { status: 404 });
